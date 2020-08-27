@@ -49,7 +49,6 @@ import PersonalMessageManager from './lib/personal-message-manager'
 import TypedMessageManager from './lib/typed-message-manager'
 import TransactionController from './controllers/transactions'
 import TokenRatesController from './controllers/token-rates'
-import DetectTokensController from './controllers/detect-tokens'
 import { PermissionsController } from './controllers/permissions'
 import getRestrictedMethods from './controllers/permissions/restrictedMethods'
 import nodeify from './lib/nodeify'
@@ -196,12 +195,6 @@ export default class MetamaskController extends EventEmitter {
       preferences: this.preferencesController.store,
       showPermissionRequest: opts.showPermissionRequest,
     }, initState.PermissionsController, initState.PermissionsMetadata)
-
-    this.detectTokensController = new DetectTokensController({
-      preferences: this.preferencesController,
-      network: this.networkController,
-      keyringMemStore: this.keyringController.memStore,
-    })
 
     this.addressBookController = new AddressBookController(undefined, initState.AddressBookController)
 
@@ -2064,7 +2057,6 @@ export default class MetamaskController extends EventEmitter {
    */
   set isClientOpen (open) {
     this._isClientOpen = open
-    this.detectTokensController.isOpen = open
   }
 
   /**
