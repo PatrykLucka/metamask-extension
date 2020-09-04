@@ -114,7 +114,7 @@ class ConnectHardwareForm extends Component {
         const errorMessage = e.message
         if (errorMessage === 'Window blocked') {
           this.setState({ browserSupported: false, error: null })
-        } else if (e.indexOf('U2F') > -1) {
+        } else if (!errorMessage && e.indexOf('U2F') > -1) {
           this.setState({ error: 'U2F' })
         } else if (errorMessage !== 'Window closed' && errorMessage !== 'Popup closed') {
           this.setState({ error: errorMessage })
